@@ -1,0 +1,30 @@
+ 
+version: '2.1'
+
+services:
+  mysql: 
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=kousto
+      - MYSQL_DATABASE=kousto
+  prestashop:
+    image: prestashop/prestashop:1.7.6.9
+    ports:
+      - "8001:80"
+    volumes:
+      - ./src:/var/www/html/themes/classic/
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    environment:
+      - ENV=dev
+      - DB_SERVER=mysql
+      - DB_USER=root
+      - DB_NAME=kousto
+      - DB_PASSWD=kousto
+      - ADMIN_MAIL=kousto@kousto.com
+      - ADMIN_PASSWD=kousto
+      - PS_INSTALL_AUTO=1
+      - PS_DOMAIN=allanic.me:8001
+      - PS_FOLDER_ADMIN=admin1
+      - PS_DEV_MODE=true

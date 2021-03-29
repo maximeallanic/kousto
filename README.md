@@ -1,0 +1,1 @@
+docker plugin install ofekmeister/gcsfs
